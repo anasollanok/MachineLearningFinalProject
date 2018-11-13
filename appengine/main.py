@@ -99,7 +99,8 @@ def predecirAire(hour, nitrogenD, carbonM, pm10M, zone, month):
     # Denormalization
     #ynew = ynew * (np.max(Y_train) - np.min(Y_train)) + np.min(Y_train)
     # show the inputs and predicted outputs
-    return ("X=%s, Predicted=%s" % (Xnew[0], ynew[0]))
+    #return ("X=%s, Predicted=%s" % (Xnew[0], ynew[0]))
+    return ynew[0][0]
 
 
 
@@ -129,7 +130,7 @@ def submitted():
     prediccion = predecirAire(HOUR, NITROGEND, CARBONM, PM10M, ZONE, MONTH)
     # [END submittedleaving]
     # [START render_template]
-    return render_template('submitted_form.html', result=prediccion)
+    return render_template('submitted_form.html', result=prediccion, hour=HOUR, nitro=NITROGEND, carbon=CARBONM, pm10M=PM10M, zone=ZONE, month=MONTH)
     # [END render_template]
 
 @app.errorhandler(500)

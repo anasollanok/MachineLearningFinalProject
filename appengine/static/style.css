@@ -31,6 +31,11 @@ h1 {
   text-align: center;
 }
 
+h4 {
+  font-weight: 300;
+  text-align: center;
+}
+
 p {
   font-size: 16px;
 }
@@ -144,6 +149,12 @@ input[class="btn"]: hover {
   margin-bottom: 40px;
   font-size: 18px;
   color: black;
+}
+
+.mydiv{
+  align-self: center;
+  margin-bottom: 40px;
+  background-color: "#FFFFFF"
 }
 
 .logo{
