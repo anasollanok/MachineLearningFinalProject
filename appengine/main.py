@@ -49,20 +49,19 @@ graph = tf.get_default_graph()
 
 # [End app variables]
 
-def predecirAire():
-    # Testing
+def predecirAire(hour, nitrogenD, carbonM, pm10M, zone, month):
 
     #score = loaded_model.evaluate(X_test, Y_test, batch_size=25)
     #print(score)
 
     # ---- INPUTS --------
     # Given hour, nitrogen dioxide,
-    hour = 1
-    nitrogenD = 14
-    carbonM = 12
-    pm10M =  106
-    zone = 1 # noroeste: 1, noreste:2, centro: 3, suroeste:4, sureste:5
-    month = 0 # from 0 to 11
+    #hour = 1
+    #nitrogenD = 14
+    #carbonM = 12
+    #pm10M =  106
+    #zone = 1 # noroeste: 1, noreste:2, centro: 3, suroeste:4, sureste:5
+    #month = 0 # from 0 to 11
 
     # Categorizing
     if nitrogenD <= 10:
@@ -127,7 +126,7 @@ def submitted():
     ZONE = request.form['ZONE']
     MONTH = request.form['MONTH']
     # Set up the timer and use this variables.
-    prediccion = predecirAire()
+    prediccion = predecirAire(HOUR, NITROGEND, CARBONM, PM10M, ZONE, MONTH)
     # [END submittedleaving]
     # [START render_template]
     return render_template('submitted_form.html', result=prediccion)
