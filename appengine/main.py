@@ -18,7 +18,11 @@ import logging
 # [START imports]
 from flask import Flask, render_template, request
 from json import dumps
+
 from keras.models import model_from_json
+from keras.optimizers import SGD
+import numpy as np
+import tensorflow as tf
 # [END imports]
 
 # [START create_app]
@@ -27,26 +31,29 @@ app = Flask(__name__)
 
 # [Start app variables]
 
+# load json and create model
+json_file = open('model.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(loaded_model_json)
+
+# load weights into new model
+loaded_model.load_weights("model.h5")
+print("Loaded model from disk")
+
+# evaluate loaded model on test data
+sgd = SGD(lr=0.05, decay=1e-6, momentum=0.5, nesterov=True) # optimizer
+loaded_model.compile(loss='mean_squared_logarithmic_error', optimizer=sgd, metrics=['mae'])
+loaded_model._make_predict_function()
+graph = tf.get_default_graph()
 
 # [End app variables]
 
 def predecirAire():
     # Testing
-    # load json and create model
-    json_file = open('model.json', 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
 
-    # load weights into new model
-    loaded_model.load_weights("model.h5")
-    print("Loaded model from disk")
-
-    # evaluate loaded model on test data
-    sgd = SGD(lr=0.05, decay=1e-6, momentum=0.5, nesterov=True) # optimizer
-    model.compile(loss='mean_squared_logarithmic_error', optimizer=sgd, metrics=['mae'])
-    score = model.evaluate(X_test, Y_test, batch_size=25)
-    print(score)
+    #score = loaded_model.evaluate(X_test, Y_test, batch_size=25)
+    #print(score)
 
     # ---- INPUTS --------
     # Given hour, nitrogen dioxide,
@@ -85,14 +92,15 @@ def predecirAire():
     else:
         pm10M = 3
 
-
-    Xnew = np.array([[hour, nitrogenD, carbonM, pm10M, zone, month]])
-    # make a prediction
-    ynew = model.predict(Xnew)
+    global graph
+    with graph.as_default():
+        Xnew = np.array([[hour, nitrogenD, carbonM, pm10M, zone, month]])
+        # make a prediction
+        ynew = loaded_model.predict(Xnew)
     # Denormalization
-    ynew = ynew * (np.max(Y_train) - np.min(Y_train)) + np.min(Y_train)
+    #ynew = ynew * (np.max(Y_train) - np.min(Y_train)) + np.min(Y_train)
     # show the inputs and predicted outputs
-    print("X=%s, Predicted=%s" % (Xnew[0], ynew[0]))
+    return ("X=%s, Predicted=%s" % (Xnew[0], ynew[0]))
 
 
 
@@ -119,10 +127,10 @@ def submitted():
     ZONE = request.form['ZONE']
     MONTH = request.form['MONTH']
     # Set up the timer and use this variables.
-
+    prediccion = predecirAire()
     # [END submittedleaving]
     # [START render_template]
-    return render_template('submitted_form.html', result="test")
+    return render_template('submitted_form.html', result=prediccion)
     # [END render_template]
 
 @app.errorhandler(500)
