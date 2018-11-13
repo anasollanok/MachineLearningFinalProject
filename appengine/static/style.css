@@ -1,0 +1,165 @@
+* {
+  color: #757575;
+}
+
+body {
+  background: url(https://images.vice.com/vice/images/articles/meta/2016/03/16/el-aire-toxico-en-la-ciudad-de-mexico-provoca-la-intervencion-presidencial-1458154730.jpg?crop=1xw%3A0.8574695121951219xh%3Bcenter%2Ccenter&resize=2000%3A*);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+form {
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  margin: 100px auto;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+}
+
+#cancel-form {
+  padding-top: 50px;
+}
+
+h1 {
+  font-weight: 300;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #757575;
+  margin-bottom: 40px;
+}
+
+input: focus {
+  outline: none;
+}
+
+.label-box {
+  position: relative;
+}
+
+label {
+  position: absolute;
+  top: -69px;
+  font-size: 16px;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+input:focus ~ .label-box label,
+input:valid ~ .label-box label {
+  font-size: 14px;
+  transform: translateY(-36px);
+  color: rgba(52, 152, 219, .7);
+}
+
+
+input[class="btn"] {
+  border: none;
+  color: #fff;
+  width: 50%;
+  align-self: flex-end;
+  background: rgba(52, 152, 219, .7);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+}
+
+input[class="cancelbtn"] {
+  border: none;
+  color: #fff;
+  width: 100%;
+  align-self: flex-end;
+  background: #ff0000;
+  text-align: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+}
+
+.update-prompt {
+  display: flex;
+  position: relative;
+}
+
+h3 {
+  display: inline-block;
+  margin-left: -20px;
+}
+
+input[class="update-btn"] {
+  border: none;
+  color: #fff;
+  width: 40%;
+  background: rgba(52, 152, 219, .7);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+  margin-top: 20px;
+  margin-left: 70px;
+}
+
+input[class="btn"]: hover {
+  cursor: pointer;
+}
+
+.label-box::before,
+.label-box::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 0;
+  bottom: 40px;
+  background-color: rgba(52, 152, 219, .7);
+  transition: all .3s;
+}
+
+
+.label-box::before {
+  left: 50%;
+}
+
+.label-box::after {
+  right: 50%;
+}
+
+.insideTitle {
+  align-self: flex-start;
+  margin-bottom: 50px;
+  margin-top: 25px;
+  margin-left: -20px;
+}
+
+.centerDiv{
+  align-self: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+  color: black;
+}
+
+.logo{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  align-self: center;
+  background: #000000;
+  background: url("../res/logo.png");
+}
+
+.containerSt {
+  display: flex;
+}
+
+input:focus ~ .label-box::before,
+input:focus ~ .label-box::after {
+  width: 50%;
+}

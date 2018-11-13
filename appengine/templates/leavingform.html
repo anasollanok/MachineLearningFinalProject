@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Leaving Home</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div class="pagetitle">
+
+      </div>
+      <div id="main">
+        <form method="post" action="{{ url_for('submitted') }}">
+          <h2 class="insideTitle">Condiciones para predicción</h2>
+
+
+          <div>
+            <div class="label-box">
+              <p>Hora del Día</p>
+            </div>
+            <input type="number" name="HOUR" required>
+          </div>
+
+
+          <div>
+            <div class="label-box">
+              <p>NitrogenD</p>
+            </div>
+            <input type="number" name="NITROGEND" required>
+          </div>
+
+          <div>
+            <div class="label-box">
+              <p>CarbonM</p>
+            </div>
+            <input type="number" name="CARBONM" required>
+          </div>
+
+          <div>
+            <div class="label-box">
+              <p>PM10M</p>
+            </div>
+            <input type="number" name="PM10M" required>
+          </div>
+
+          <div>
+            <div class="label-box">
+              <p>ZONE (noroeste: 1, noreste:2, centro: 3, suroeste:4, sureste:5)</p>
+            </div>
+            <input type="number" name="ZONE" required>
+          </div>
+
+          <div>
+            <div class="label-box">
+              <p>Month (0-11)</p>
+            </div>
+            <input type="number" name="MONTH" required>
+          </div>
+
+          <input type="submit" class="btn" value="Predecir" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
