@@ -151,16 +151,19 @@ input[class="btn"]: hover {
   color: black;
 }
 
-.mydiv{
+.mydivt{
+  margin: 20%;
   align-self: center;
   margin-bottom: 40px;
-  background-color: "#FFFFFF"
+  padding: 40px;
+  background:white;
 }
 
 .logo{
-  width: 250px;
-  height: 250px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
+
   align-self: center;
   background: #000000;
   background: url("../res/logo.png");
