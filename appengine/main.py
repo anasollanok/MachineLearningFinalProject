@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # [START app]
+from __future__ import division
 import logging
 
 # [START imports]
@@ -23,6 +24,7 @@ from keras.models import model_from_json
 from keras.optimizers import SGD
 import numpy as np
 import tensorflow as tf
+
 # [END imports]
 
 # [START create_app]
@@ -93,9 +95,13 @@ def predecirAire(hour, nitrogenD, carbonM, pm10M, zone, month):
 
     global graph
     with graph.as_default():
-        Xnew = np.array([[hour, nitrogenD, carbonM, pm10M, zone, month]])
+        Xnew = np.array([[hour, nitrogenD, carbonM, pm10M, zone, month]], dtype='float64')
+        # normalize before predicting
+        Xnew = Xnew / np.float64(3418.6604101606817)
         # make a prediction
         ynew = loaded_model.predict(Xnew)
+        # Denormalization
+        ynew = ynew * np.float64(8896.24488197127)
     # Denormalization
     #ynew = ynew * (np.max(Y_train) - np.min(Y_train)) + np.min(Y_train)
     # show the inputs and predicted outputs
